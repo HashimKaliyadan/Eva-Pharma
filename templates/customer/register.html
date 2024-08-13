@@ -1,0 +1,25 @@
+{% extends "base/customer-base.html" %} 
+{% block container %} 
+{% load static %}
+
+<section class="flex justify-center items-center min-h-screen px-10 bg-gradient-to-r from-teal-500 to-purple-600">
+    <div class="w-full sm:w-[60%] md:w-[40%] p-8 rounded-md shadow-md border-2 bg-white">
+        <h1 class="text-center font-bold mb-6 text-[24px] text-gray-800">CREATE ACCOUNT</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="first_name" placeholder="Enter Name" class="outline-none w-full py-2 px-4 mb-4 rounded-md border-2 text-gray-700 focus:ring-teal-500 focus:border-teal-500">
+            <input type="text" name="username" placeholder="Enter Username" class="outline-none w-full py-2 px-4 mb-4 rounded-md border-2 text-gray-700 focus:ring-teal-500 focus:border-teal-500">
+            <input type="email" name="email" placeholder="Enter Email" class="outline-none w-full py-2 px-4 mb-4 rounded-md border-2 text-gray-700 focus:ring-teal-500 focus:border-teal-500">
+            <input type="number" name="phone_number" placeholder="Enter Phone" class="outline-none w-full py-2 px-4 mb-4 rounded-md border-2 text-gray-700 focus:ring-teal-500 focus:border-teal-500">
+            <input type="password" name="password" placeholder="Enter Password" class="outline-none w-full py-2 px-4 mb-4 rounded-md border-2 text-gray-700 focus:ring-teal-500 focus:border-teal-500">
+            <button type="submit" class="bg-gradient-to-r from-teal-600 to-purple-600 hover:bg-purple-700 text-white w-full py-2 px-4 rounded-md border-2 transition duration-300">LOGIN</button>
+        </form>
+        {% if error %}
+        <p class="mt-4 text-red-500">{{message}}</p>
+        {% endif %}
+        <p class="mt-4 text-gray-600">Existing <a href="{% url 'customers:login' %}" class="text-teal-500">Account</a></p>
+        <p class="mt-4 text-gray-600">Manager <a href="{% url 'managers:login' %}" class="text-teal-500">Login</a></p>
+    </div>
+</section>
+
+{% endblock %}

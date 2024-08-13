@@ -1,0 +1,59 @@
+{% extends "base/customer-base.html" %} 
+{% block container %} 
+{% load static %}
+{% include 'includes/customer-nav.html' %}
+
+<section class="grid grid-cols-4 gap-5 p-10">
+    <div class="col-span-1 p-4 rounded-md border shadow-md bg-gradient-to-r from-teal-500 to-purple-600 text-white">
+        <div class="flex justify-center mb-4">
+            <img src="{% static 'images/man.png' %}" alt="profile" class="w-[60px] rounded-full">
+        </div>
+        <h1 class="text-center mb-4 font-bold text-lg">{{customer.user.first_name}}</h1>
+        <h1 class="text-center mb-4 font-bold text-lg">{{customer.user.email}}</h1>
+        <h1 class="text-center mb-4 font-bold text-lg">{{customer.user.phone_number}}</h1>
+    </div>
+    <div class="col-span-3 p-4 rounded-md border shadow-md">
+        <h1 class="font-bold mb-4 text-2xl text-gradient">YOUR ORDERS</h1>
+        <div class="grid grid-cols-3 gap-5">
+            {% for order in instances %}
+            <div class="col-span-1 p-4 rounded-md border shadow-md bg-gray-100">
+                <h1 class="text-lg font-bold mb-2">Order ID - 00010{{order.id}}</h1>
+                <p class="text-gray-600 mb-4">{{order.date_ordered}}</p>
+                {% for item in order.items.all %}
+                    <div class="flex items-center justify-between mb-2">
+                        <p class="text-gray-700">{{item.product.name}} x {{item.qty}}</p>
+                        <p class="text-gray-700">{{item.product.price}}</p>
+                    </div>
+                {% endfor %}
+                <hr class="my-4 border-t border-gray-300">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-lg font-bold">Total Amount</h1>
+                    <h1 class="text-lg font-bold">{{order.amount}}</h1>
+                </div>
+                <p id="countdown" class="mt-4 font-bold text-green-600">Product will arrive in one hour</p>
+                <div class="mt-8">
+                    <h2 class="text-lg font-semibold mb-2">Feedback here</h2>
+                </div>
+                <textarea id="feedback" class="mt-2 p-3 border border-gray-300 rounded-md w-full h-20" placeholder="Leave your feedback here..."></textarea>
+                <button id="submitFeedback" class="bg-teal-500 text-white font-bold py-2 px-4 rounded-full mt-4 hover:bg-teal-600">Submit Feedback</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    // JavaScript for handling feedback submission
+    document.getElementById('submitFeedback').addEventListener('click', function() {
+        // Submit feedback logic here
+        // For demonstration purposes, showing an alert
+        alert("Your feedback has been sent!");
+        // Clear the text area
+        document.getElementById('feedback').value = "";
+    });
+</script>
+
+{% endblock %}
+
+
+

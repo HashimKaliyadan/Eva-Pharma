@@ -1,0 +1,54 @@
+{% extends "base/customer-base.html" %} {% block container %} {% load static %}
+{% include 'includes/customer-nav.html' %}
+
+<section class="w-90% m-auto py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <!-- Cart Items and Bill Details -->
+    <div class="bg-white p-8 rounded-md shadow-md mr-4">
+        <h1 class="text-2xl font-bold mb-5">Your Cart</h1>
+        
+        <!-- Sample Cart Items -->
+        <div class="mb-4">
+            {% for cart in carts %}
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-gray-500">{{cart.product.name}}</span>
+                <span class="text-gray-500">₹ {{cart.product.price}}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Bill Details -->
+        <div class="border-t border-gray-300 pt-4">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-gray-500">Total Items:</span>
+                <span class="text-gray-500">{{count}}</span>
+            </div>
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-gray-500 font-semibold text-[18px]">Total Amount:</span>
+                <span class="text-gray-500 font-semibold text-[18px]">₹ {{total_amount}}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address and Pincode Form -->
+    <div>
+        <form action="" method="post" enctype="multipart/form-data" class="px-10">
+            {% csrf_token %}
+            
+            <p class="font-bold mb-1">Enter your full address</p>
+            {{form.address}}
+            
+            <p class="font-bold mb-1 mt-4">Enter your pincode</p>
+            {{form.pincode}}
+
+            <div class="text-center mt-8">
+                <input type="submit" value="ORDER NOW" class="py-2 px-4 text-white font-bold text-[14px] bg-gradient-to-r from-purple-500 to-blue-500 rounded-md" />
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}

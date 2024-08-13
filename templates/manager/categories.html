@@ -1,0 +1,42 @@
+{% extends "base/manager-base.html" %} 
+{% block container %} 
+{% load static %}
+{% include 'includes/manager-nav.html' %}
+
+<section class="p-10">
+    <div class="flex justify-between items-center mb-5">
+        <h1 class="font-bold text-2xl">CATEGORIES</h1>
+        <a href="{% url 'managers:category_add' %}" class="py-2 px-4 text-white font-bold text-sm bg-gradient-to-r from-indigo-600 to-blue-500 rounded-md">ADD NEW</a>
+    </div>
+
+    <div class="overflow-x-auto border rounded-md shadow-md">
+        <table class="min-w-full text-left text-sm font-light border border-gray-300 rounded-md overflow-hidden">
+            <thead class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                <tr>
+                    <th scope="col" class="px-6 py-4">Image</th>
+                    <th scope="col" class="px-6 py-4">Name</th>
+                    <th scope="col" class="px-6 py-4">Edit</th>
+                    <th scope="col" class="px-6 py-4">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instance in instances %}
+                    <tr class="border-b border-gray-300">
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <img src="{{instance.image.url}}" alt="Category Image" class="w-[60px] h-[60px] rounded-md">
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">{{instance.name}}</td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <a href="{% url 'managers:category_edit' id=instance.id %}" class="py-2 px-4 text-white font-bold text-sm bg-gradient-to-r from-green-400 to-green-500 rounded-md">EDIT</a>
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            <a href="{% url 'managers:category_delete' id=instance.id %}" class="py-2 px-4 text-white font-bold text-sm bg-gradient-to-r from-red-500 to-pink-500 rounded-md">DELETE</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}

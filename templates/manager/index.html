@@ -1,0 +1,65 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+{% include 'includes/manager-nav.html' %}
+
+<section class="px-10 py-10 grid grid-cols-4 gap-5 text-white">
+
+    <div class="col-span-1 p-5 border-2 rounded-md bg-gradient-to-r from-purple-500 to-blue-500">
+        <h1 class="text-center font-bold text-[18px] mb-[16px]">ORDERS</h1>
+        <p class="text-center font-bold text-[28px]">{{orders}}</p>
+    </div>
+    <div class="col-span-1 p-5 border-2 rounded-md bg-gradient-to-r from-purple-500 to-blue-500">
+        <h1 class="text-center font-bold text-[18px] mb-[16px]">PRODUCTS</h1>
+        <p class="text-center font-bold text-[28px]">{{products}}</p>
+    </div>
+    <div class="col-span-1 p-5 border-2 rounded-md bg-gradient-to-r from-purple-500 to-blue-500">
+        <h1 class="text-center font-bold text-[18px] mb-[16px]">CATEGORIES</h1>
+        <p class="text-center font-bold text-[28px]">{{categories}}</p>
+    </div>
+    <div class="col-span-1 p-5 border-2 rounded-md bg-gradient-to-r from-purple-500 to-blue-500">
+        <h1 class="text-center font-bold text-[18px] mb-[16px]">CUSTOMERS</h1>
+        <p class="text-center font-bold text-[28px]">{{customers}}</p>
+    </div>
+
+</section>
+
+<section class="p-10">
+    <div class="flex justify-between items-center mb-5">
+        <h1 class="font-bold text-2xl">RECENT ORDERS</h1>
+        <a href="{% url 'managers:orders' %}" class="py-2 px-4 text-white font-bold text-sm bg-gradient-to-r from-cyan-600 to-blue-500 rounded-md">VIEW ALL</a>
+    </div>
+
+    <div class="overflow-x-auto border rounded-md shadow-md">
+        <table class="min-w-full text-left text-sm font-light border border-gray-300 rounded-md overflow-hidden">
+            <thead class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+                <tr>
+                    <th scope="col" class="px-6 py-4">Name And Address</th>
+                    <th scope="col" class="px-6 py-4">Products</th>
+                    <th scope="col" class="px-6 py-4">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for instance in instances %}
+                    <tr class="border-b border-gray-300">
+                        <td class="whitespace-nowrap px-6 py-4">
+                            {{instance.customer.user.first_name}} <br>
+                            {{instance.address}} <br>
+                            {{instance.pincode}}
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">
+                            {% for item in instance.items.all %}
+                            <p>{{item.product.name}} x {{item.qty}}</p>
+                            {% endfor %}
+                        </td>
+                        <td class="whitespace-nowrap px-6 py-4">{{instance.amount}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}

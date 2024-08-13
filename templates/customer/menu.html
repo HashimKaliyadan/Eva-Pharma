@@ -1,0 +1,70 @@
+{% extends "base/customer-base.html" %} 
+{% block container %} 
+{% load static %}
+{% include 'includes/customer-nav.html' %}
+
+<section class="bg-gradient-to-r from-teal-500 to-purple-600 text-white py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-extrabold mb-8">Explore Our Medicines</h2>
+        <div class="flex justify-center space-x-4">
+            {% for category in categories %}
+            <!-- <a href="#" class="hover:underline">
+                <img src="{{category.image.url}}" alt="Appetizers" class="ml-4 rounded-[10px] w-[100px] h-[90px]">
+                <span class="block mt-2 font-semibold">{{category.name}}</span>
+            </a> -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Prescription Upload Section -->
+<section class="container mx-auto py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Prescription Upload Card -->
+     
+
+        <!-- Product Cards -->
+        {% for product in products %}
+        <div class="bg-white p-6 rounded-md shadow-md">
+            <img src="{{product.image.url}}" alt="Item 1" class="rounded-md mb-4">
+            <h3 class="text-xl font-bold mb-2">{{product.name}}</h3>
+            <p class="text-gray-700 mb-4">{{product.description}}</p>
+            <p class="text-gray-800 font-semibold mb-4">₹ {{product.price}}</p>
+            <a href="{% url 'customers:cart_add' id=product.id %}" class="bg-teal-500 text-white font-bold py-2 px-4 rounded-full mt-4 hover:bg-teal-600">Add to Cart</a>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% include 'includes/customer-foot.html' %}
+
+<script>
+    // JavaScript for file input change event
+    document.getElementById('prescriptionFileInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('prescriptionPreview');
+        const uploadButton = document.getElementById('uploadButton');
+
+        // Clear previous preview
+        preview.innerHTML = '';
+
+        // Create image element for preview
+        const img = document.createElement('img');
+        img.classList.add('rounded-md', 'mb-4');
+        img.file = file;
+        preview.appendChild(img);
+
+        // Display preview image
+        const reader = new FileReader();
+        reader.onload = (function(aImg) {
+            return function(e) {
+                aImg.src = e.target.result;
+                uploadButton.disabled = false; // Enable upload button after selecting image
+            };
+        })(img);
+        reader.readAsDataURL(file);
+    });
+</script>
+
+{% endblock %}

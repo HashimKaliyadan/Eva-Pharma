@@ -1,0 +1,22 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+{% include 'includes/manager-nav.html' %}
+<section class="p-10">
+    <div class="flex justify-between items-center mb-5">
+        <h1 class="font-bold">ADD Size</h1>
+        <a href="{% url 'managers:size' %}" class="py-2 px-4 text-white font-bold text-[14px] bg-cyan-600 rounded-md">Size</a>
+    </div>
+    <div class="w-full sm:w-[70%] md:w-[50%] m-auto">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="w-full py-1 px-5 mb-2 border-2 rounded-md">
+                {{form.size}}
+            </div>
+        </form>
+        
+        
+    </div>
+
+
+</section>
+
+{% endblock %}

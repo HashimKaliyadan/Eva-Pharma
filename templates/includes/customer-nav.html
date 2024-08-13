@@ -1,0 +1,31 @@
+{% load static %}
+
+
+<header class="h-[70px] flex justify-between items-center px-10 shadow-md bg-gradient-to-r from-teal-500 to-purple-600">
+    <div>
+        <h1 class="font-extrabold text-[24px] text-white">EVA PHARMA</h1>
+    </div>
+    <div class="flex items-center">
+        <ul class="flex justify-end items-center">
+            <li class="mr-8 font-semibold text-[18px] text-white"><a href="{% url 'customers:index' %}">Home</a></li>
+            <li class="mr-8 font-semibold text-[18px] text-white"><a href="{% url 'customers:menu' %}">Medicine</a></li>
+            <li class="mr-8 font-semibold text-[18px] text-white"><a href="{% url 'customers:account' %}">Account</a></li>
+            
+            <!-- Cart Option with Shopping Bag Icon -->
+            <li class="relative mr-[50px]">
+                <a href="{% url 'customers:cart' %}" class="flex items-center text-white">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7a3 3 0 100-6 3 3 0 000 6zM21 21a1 1 0 01-1 1H4a1 1 0 01-1-1M4 19h16v-8H4a2 2 0 00-2 2v4a2 2 0 002 2z"></path>
+                    </svg>
+                    <!-- Rounded Badge for Item Count -->
+                    <div class="bg-white text-teal-500 w-6 h-6 rounded-full flex items-center justify-center absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2">
+                        <span class="text-xs font-semibold">{{count}}</span>
+                    </div>
+                </a>
+            </li>
+
+            <!-- Logout Option -->
+            <li class="mr-8 font-semibold text-[18px] py-2 px-4 border-white border-[3px] rounded-md text-white"><a href="{% url 'customers:logout' %}">LOGOUT</a></li>
+        </ul>
+    </div>
+</header>

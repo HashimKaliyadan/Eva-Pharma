@@ -1,0 +1,40 @@
+{% extends "base/customer-base.html" %} {% block container %} {% load static %}
+{% include 'includes/customer-nav.html' %}
+
+
+<!-- Spotlight Section -->
+<main class="container mx-auto py-10">
+    <h2 class="text-3xl font-extrabold mb-8">Shopping Cart</h2>
+
+    <!-- Cart Items -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% if instances %}
+        {% for instance in instances %}
+        <div class="bg-white p-4 rounded-md shadow-md">
+            <img src="{{instance.product.image.url}}" alt="Item Image" class="w-full h-[70%] object-cover mb-4 rounded-md">
+            <h3 class="text-xl font-bold mb-2">{{instance.product.name}}</h3>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <a href="{% url 'customers:cart_remove_page' id=instance.id %}" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full">-</a>
+                    <span class="text-xl font-semibold">{{instance.qty}}</span>
+                    <a href="{% url 'customers:cart_update_page' id=instance.id %}" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full">+</a>
+                </div>
+                <span class="text-xl font-semibold">₹ {{instance.amount}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Checkout Section -->
+    <div class="mt-8 flex justify-end">
+        <a href="{% url 'customers:order_place' %}" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-6 py-3 rounded-md">Checkout</a>
+    </div>
+    {% else%}
+    <h2 class="text-xl font-semibold text-gray-500 mb-8">No items found.</h2>
+    {% endif %}
+
+</main>
+
+
+
+{% endblock %}

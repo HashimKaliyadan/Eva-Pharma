@@ -1,0 +1,36 @@
+{% extends "base/manager-base.html" %} {% block container %} {% load static %}
+{% include 'includes/manager-nav.html' %}
+<section class="p-10 ">
+    <h1 class="font-bold text-2xl mb-6 text-center text-gray-700">ADD ITEM</h1>
+    <div class="w-full sm:w-[70%] md:w-[50%] m-auto">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="w-full py-1 px-5 mb-2 border-2 rounded-md">
+                {{form.name}}
+            </div>
+            <label for="categoryName" class="text-lg text-gray-500 font-normal">Select Category</label>
+            <div class="w-full py-1 px-5 mb-2 border-2 rounded-md mt-2">
+                {{form.category}}
+            </div>
+            <div class="w-full py-1 px-5 mb-2 border-2 rounded-md">
+                {{form.price}}
+            </div>
+            <div class="w-full py-1 px-5 mb-2 border-2 rounded-md">
+                {{form.description}}
+            </div>
+            <label for="categoryName" class="text-lg text-gray-500 font-normal">Select Image</label>
+            <div class="w-full py-1 px-5 mb-2 mt-2 border-2 rounded-md">
+                {{form.image}}
+            </div>
+            <div class="w-full py-1 px-5 mb-2  rounded-md flex justify-center items-center ">
+                <button type="submit" class="bg-gradient-to-r from-purple-500 to-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+            </div>
+        </form>
+        
+        
+    </div>
+
+
+</section>
+
+{% endblock %}
